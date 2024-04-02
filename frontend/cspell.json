@@ -1,0 +1,28 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "bgcolor",
+    "hookform",
+    "ianvs",
+    "iconify",
+    "nextjs",
+    "plusplus",
+    "Searchbar",
+    "simplebar",
+    "thns",
+    "Tiếng",
+    "Toastify",
+    "Việt",
+    "zustand"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "endpoints/**",
+    "*coverage/**",
+    ".husky/**",
+    ".github/**",
+    "dist/**",
+    "logs/**"
+  ]
+}
