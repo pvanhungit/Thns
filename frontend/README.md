@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Prerequisites
 
 - Node.js 18 (we recommend using nvm for installation)
-- Yarn class (v1.22): install by running the command below
+- Yarn classic (v1.22): install by running the command below
   ```bash
   npm install --global yarn
   ```
