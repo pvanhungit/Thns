@@ -14,7 +14,7 @@ public class ControllerLogin{
         List<String> personList = new ArrayList<>();
         personList.add("Hưng");
         personList.add("Tuấn");
-        personList.add("Phước");
+        personList.add("Phước ");
         personList.add("Khánh");
         return personList;
     }
