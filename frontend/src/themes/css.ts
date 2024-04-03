@@ -96,7 +96,7 @@ export function bgBlur(props: {
         WebkitBackdropFilter: `blur(${blur}px)`,
         backgroundColor: alpha(color, opacity),
       },
-    };
+    } as const;
   }
 
   return {
