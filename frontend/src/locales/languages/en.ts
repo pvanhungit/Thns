@@ -17,5 +17,6 @@ export default {
 
   actions: {
     login: 'Login',
+    search: 'Search',
   },
 } as const;

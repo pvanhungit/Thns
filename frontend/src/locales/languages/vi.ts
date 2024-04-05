@@ -19,5 +19,6 @@ export default {
 
   actions: {
     login: 'Đăng nhập',
+    search: 'Tìm kiếm',
   },
 } as const;

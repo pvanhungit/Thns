@@ -10,7 +10,7 @@ import { getScopedI18n } from '@/locales/server';
 
 import { GoogleLoginButton } from '@/modules/auth/client/components';
 
-import { SignInForm } from '../_components/sign-in-form';
+import { SignInForm } from './sign-in-form';
 
 // ----------------------------------------------------------------------
 
