@@ -16,4 +16,5 @@
     gradlew update
     ```
 
-5. Test API controller UserController.java on file [backend/src/main/java/com/example/backend/controller/testAPI/generated-requests.http].
+5. run [backend/src/main/java/com/example/backend/Application.java].
+6. Test API controller UserController.java on file [backend/src/main/java/com/example/backend/controller/testAPI/generated-requests.http].
