@@ -1,0 +1,24 @@
+task deployChangeLog {
+    doFirst {
+        def liquibasePropertiesFile = file('src/main/resources/application.properties')
+        if (liquibasePropertiesFile.exists()) {
+            def liquibaseProperties = new Properties()
+            liquibaseProperties.load(new FileInputStream(liquibasePropertiesFile))
+
+            liquibase {
+                activities {
+                    main {
+                        changelogFile liquibaseProperties.getProperty('liquibase.changeLogFile')
+                        url liquibaseProperties.getProperty('spring.datasource.url')
+                        username liquibaseProperties.getProperty('spring.datasource.username')
+                        password liquibaseProperties.getProperty('spring.datasource.password')
+                        driver liquibaseProperties.getProperty('spring.datasource.driver-class-name')
+                    }
+                }
+            }
+        } else {
+            throw new GradleException("File application.properties not found!")
+        }
+    }
+}
+update.dependsOn(deployChangeLog)

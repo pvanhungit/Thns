@@ -2,13 +2,17 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.liquibase.gradle' version '2.2.0'
+    id "org.hibernate.orm" version "6.5.0.CR1"
 }
+
+apply from: 'liquibase.gradle'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = JavaVersion.VERSION_17
 }
 
 configurations {
@@ -23,12 +27,26 @@ repositories {
 
 dependencies {
 //    implementation 'org.springframework.boot:spring-boot-starter-oauth2-authorization-server'
+//    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.yaml:snakeyaml:2.2'
+    implementation 'org.postgresql:postgresql'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'net.sf.dozer:dozer:5.5.1'
+
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.24.0'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+    liquibaseRuntime 'org.yaml:snakeyaml:2.2'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.0'
+
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-web-test'
+//    testImplementation 'org.springframework.security:spring-web-test'
 }
 
 tasks.named('test') {
