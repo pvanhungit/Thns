@@ -1,0 +1,51 @@
+###
+POST http://localhost:8080/user/add
+Content-Type: application/json
+
+{
+  "id": 1,
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "userName": "johndoe",
+  "password": "password123",
+  "type": 1,
+  "updateTime": "2024-04-09T00:00:00Z"
+}
+
+###
+POST http://localhost:8080/user/add
+Content-Type: application/json
+
+{
+  "id": null,
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "userName": "johndoe",
+  "password": "password123",
+  "type": 1,
+  "updateTime": "2024-04-09T00:00:00Z"
+}
+
+###
+GET http://localhost:8080/user/getAll
+
+###
+GET http://localhost:8080/user/findById/2
+
+
+###
+PUT http://localhost:8080/user/update
+Content-Type: application/json
+
+{
+  "id": 2,
+  "firstName": "Phuoc",
+  "lastName": "Le",
+  "email": "john.doe@example.com",
+  "userName": "phuocle",
+  "password": "password123",
+  "type": 1,
+  "updateTime": "2024-04-09T00:00:00Z"
+}

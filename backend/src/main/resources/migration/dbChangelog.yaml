@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: phuocle
+      changes:
+        - createTable:
+            tableName: USERS
+            columns:
+              - column:
+                  name: ID
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: FIRST_NAME
+                  type: varchar(100)
+              - column:
+                  name: LAST_NAME
+                  type: varchar(100)
+              - column:
+                  name: EMAIL
+                  type: varchar(100)
+              - column:
+                  name: USER_NAME
+                  type: varchar(100)
+              - column:
+                  name: PASSWORD
+                  type: varchar(200)
+              - column:
+                  name: TYPE
+                  type: int
+              - column:
+                  name: CREATE_TIME
+                  type: timestamp
+                  defaultValueDate: 'now()'
+              - column:
+                  name: UPDATE_TIME
+                  type: timestamp
+                  defaultValueDate: 'now()'
+
+
+        - createTable:
+            tableName: Role
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(200)
+              - column:
+                  name: CREATE_TIME
+                  type: datetime
+                  defaultValueDate: 'now()'
+              - column:
+                  name: UPDATE_TIME
+                  type: datetime
+                  defaultValueDate: 'now()'
+
+
+        - sql:
+            sql: |
+              INSERT INTO USERS (ID, FIRST_NAME, LAST_NAME, EMAIL, USER_NAME, PASSWORD, TYPE)
+              VALUES (1, 'Administrator', '', '', 'admin', '', 1);
