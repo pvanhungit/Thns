@@ -1,7 +1,7 @@
-package com.example.backend.service.service;
+package com.thns.service.service;
 
-import com.example.backend.domain.User;
-import com.example.backend.dto.UserDto;
+import com.thns.domain.User;
+import com.thns.dto.UserDto;
 
 import java.util.List;
 import java.util.Optional;
