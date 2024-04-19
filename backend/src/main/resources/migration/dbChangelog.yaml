@@ -53,6 +53,9 @@ databaseChangeLog:
                   name: name
                   type: varchar(200)
               - column:
+                  name: TYPE
+                  type: int
+              - column:
                   name: CREATE_TIME
                   type: datetime
                   defaultValueDate: 'now()'

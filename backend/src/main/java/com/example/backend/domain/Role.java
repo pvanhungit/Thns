@@ -1,14 +1,15 @@
 package com.example.backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
 @SuppressWarnings("serial")
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Role")
 public class Role {
@@ -19,6 +20,9 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "TYPE")
+    private int type;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATE_TIME")
