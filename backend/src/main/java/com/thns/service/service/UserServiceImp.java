@@ -1,15 +1,15 @@
-package com.example.backend.service.service;
+package com.thns.service.service;
 
-import com.example.backend.dao.UserDao;
-import com.example.backend.domain.User;
-import com.example.backend.dto.UserDto;
-import com.example.backend.service.utils.Mapper;
+import com.thns.dao.UserDao;
+import com.thns.domain.User;
+import com.thns.dto.UserDto;
+import com.thns.service.utils.Mapper;
+import com.thns.service.utils.ConvertObject;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +39,7 @@ public class UserServiceImp implements UserService {
         if (userDto.getId() != null && userDao.existsById(userDto.getId())) {
             return null;
         } else {
-            User savedUser = userDao.save(user);
+            User savedUser = userDao.save(ConvertObject.toInsert(user));
             UserDto savedUserDTO = new UserDto();
             BeanUtils.copyProperties(savedUser, savedUserDTO);
             return savedUserDTO;
@@ -59,9 +59,8 @@ public class UserServiceImp implements UserService {
             user.setUserName(userDto.getUserName());
             user.setPassword(userDto.getPassword());
             user.setType(userDto.getType());
-            user.setUpdateTime(new Date());
 
-            return mapper.map(userDao.save(user), UserDto.class) ;
+            return mapper.map(userDao.save(ConvertObject.toUpdate(user)), UserDto.class) ;
         } else {
             return null;
         }

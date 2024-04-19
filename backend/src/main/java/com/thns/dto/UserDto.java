@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.thns.dto;
 
 import lombok.Getter;
 import lombok.Setter;
