@@ -1,25 +1,27 @@
-package com.thns.controller;
+package com.thns.user;
 
-import com.thns.domain.User;
-import com.thns.dto.UserDto;
-import com.thns.service.service.UserService;
+import com.thns.controller.ExceptionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
 public class UserController extends ExceptionResolver {
     @Autowired
     @Qualifier("userService")
     private UserService userService;
 
     @GetMapping("/getAll")
+    @PreAuthorize("hasAnyAuthority('admin:read', 'management:read')")
     public ResponseEntity<?> getAllPersons() {
         List<User> listUser = userService.getAllUser();
 
@@ -31,6 +33,7 @@ public class UserController extends ExceptionResolver {
     }
 
     @GetMapping("/findById/{userId}")
+    @PreAuthorize("hasAnyAuthority('admin:read', 'management:read')")
     public ResponseEntity<?> getFindPersons(@PathVariable String userId) {
         Optional<User> user = userService.getUserById(Long.valueOf(userId));
 
@@ -42,6 +45,7 @@ public class UserController extends ExceptionResolver {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAnyAuthority('admin:create', 'management:create')")
     public ResponseEntity<?> addUser(@RequestBody UserDto userDto) {
         UserDto newUser = userService.addUser(userDto);
 
@@ -53,6 +57,7 @@ public class UserController extends ExceptionResolver {
     }
 
     @PutMapping("/update")
+    @PreAuthorize("hasAnyAuthority('admin:update', 'management:update')")
     public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) {
         UserDto updatedUser = userService.updateUser(userDto);
 
@@ -64,6 +69,7 @@ public class UserController extends ExceptionResolver {
     }
 
     @DeleteMapping("/delete/{userId}")
+    @PreAuthorize("hasAnyAuthority('admin:delete', 'management:delete')")
     public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
         boolean deleted = userService.deleteUser(userId);
 
@@ -74,4 +80,11 @@ public class UserController extends ExceptionResolver {
         }
     }
 
+    @PatchMapping("/changePassword")
+    @PreAuthorize("hasAnyAuthority('admin:update', 'management:update')")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request
+            , Principal connectedUser) {
+        userService.changePassword(request, connectedUser);
+        return ResponseEntity.status(HttpStatus.OK).body("Password updated");
+    }
 }

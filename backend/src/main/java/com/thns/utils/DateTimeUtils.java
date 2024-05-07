@@ -1,4 +1,4 @@
-package com.thns.service.utils;
+package com.thns.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

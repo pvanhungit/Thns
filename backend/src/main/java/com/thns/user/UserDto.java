@@ -1,4 +1,4 @@
-package com.thns.dto;
+package com.thns.user;
 
 import lombok.Getter;
 import lombok.Setter;

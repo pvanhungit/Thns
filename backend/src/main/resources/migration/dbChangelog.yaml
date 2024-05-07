@@ -21,9 +21,8 @@ databaseChangeLog:
               - column:
                   name: EMAIL
                   type: varchar(100)
-              - column:
-                  name: USER_NAME
-                  type: varchar(100)
+                  constraints:
+                    unique: true
               - column:
                   name: PASSWORD
                   type: varchar(200)
@@ -31,6 +30,9 @@ databaseChangeLog:
                   name: TYPE
                   type: int
               - column:
+                  name: ROLE
+                  type: int
+              - column:
                   name: CREATE_TIME
                   type: timestamp
                   defaultValueDate: 'now()'
@@ -39,33 +41,42 @@ databaseChangeLog:
                   type: timestamp
                   defaultValueDate: 'now()'
 
-
         - createTable:
-            tableName: Role
+            tableName: TOKEN
             columns:
               - column:
-                  name: id
+                  name: ID
                   type: int
                   autoIncrement: true
                   constraints:
                     primaryKey: true
               - column:
-                  name: name
-                  type: varchar(200)
+                  name: TOKEN
+                  type: VARCHAR(500)
               - column:
-                  name: TYPE
-                  type: int
+                  name: TOKEN_TYPE
+                  type: VARCHAR(255)
+              - column:
+                  name: REVOKED
+                  type: BOOLEAN
+              - column:
+                  name: EXPIRED
+                  type: BOOLEAN
+              - column:
+                  name: USER_ID
+                  type: INTEGER
               - column:
                   name: CREATE_TIME
-                  type: datetime
+                  type: timestamp
                   defaultValueDate: 'now()'
               - column:
                   name: UPDATE_TIME
-                  type: datetime
+                  type: timestamp
                   defaultValueDate: 'now()'
-
-
-        - sql:
-            sql: |
-              INSERT INTO USERS (ID, FIRST_NAME, LAST_NAME, EMAIL, USER_NAME, PASSWORD, TYPE)
-              VALUES (1, 'Administrator', '', '', 'admin', '', 1);
+            foreignKeyConstraints:
+              - foreignKeyConstraint:
+                  baseTableName: TOKEN
+                  baseColumnNames: USER_ID
+                  constraintName: FK_USER_ID
+                  referencedTableName: USERS
+                  referencedColumnNames: ID

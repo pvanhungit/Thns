@@ -1,4 +1,4 @@
-package com.thns.service.utils;
+package com.thns.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

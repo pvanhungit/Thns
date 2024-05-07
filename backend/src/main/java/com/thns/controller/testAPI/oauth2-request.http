@@ -1,0 +1,37 @@
+###
+POST http://localhost:8080/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "phuocMana2",
+  "lastName": "leMana",
+  "email": "abc@gmail.com",
+  "password": "password1234",
+  "role": "MANAGER"
+}
+
+###
+POST http://localhost:8080/v1/auth/authenticate
+Content-Type: application/json
+
+{
+  "email": "abc@gmail.com",
+  "password": "password1234"
+}
+
+####
+GET http://localhost:8080/v1/admin/get
+Authorization: Bearer {access_token}
+
+####
+PUT http://localhost:8080/v1/admin/update
+Authorization: Bearer {access_token}
+
+
+####
+#POST http://localhost:8080/v1/auth/refresh-token
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaHVvYy5sZUBnbWFpbC5jb20iLCJpYXQiOjE3MTM3OTk5NTgsImV4cCI6MTcxMzg4NjM1OH0.hNAMuAtey9MrmsUqpyxzSeC8reE_BFv3PAJq37SSrp0
+#
+
+
+
