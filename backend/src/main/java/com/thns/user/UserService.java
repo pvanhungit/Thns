@@ -1,8 +1,6 @@
-package com.thns.service.service;
+package com.thns.user;
 
-import com.thns.domain.User;
-import com.thns.dto.UserDto;
-
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +10,5 @@ public interface UserService {
     UserDto addUser(UserDto userDto);
     UserDto updateUser(UserDto userDto);
     boolean deleteUser(Long userId);
+    void changePassword(ChangePasswordRequest request, Principal connectedUser);
 }

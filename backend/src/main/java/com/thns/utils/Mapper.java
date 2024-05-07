@@ -1,4 +1,4 @@
-package com.thns.service.utils;
+package com.thns.utils;
 
 import org.dozer.DozerBeanMapper;
 import org.dozer.MappingException;

@@ -14,21 +14,45 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/user/add
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzcxOTkwMSwiZXhwIjoxNzEzODA2MzAxfQ.K3EH0r4vVzbSxqc6t63QOcFddGzsdMDKD-_w2JhhXrw
 Content-Type: application/json
 
 {
   "id": null,
-  "firstName": "pppp",
-  "lastName": "pppp",
-  "email": "john.doe@example.com",
-  "userName": "johndoe",
+  "firstName": "mana",
+  "lastName": "mana",
+  "email": "abc@gmail.com",
   "password": "password123",
-  "type": 1
+  "type": 1,
+  "role": 0
 }
 
 ###
 GET http://localhost:8080/user/getAll
-Cookie: JSESSIONID=A2C67549DF7185A09EEF86290EF4AC02
+#admin
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzcxOTkwMSwiZXhwIjoxNzEzODA2MzAxfQ.K3EH0r4vVzbSxqc6t63QOcFddGzsdMDKD-_w2JhhXrw
+
+
+###
+GET http://localhost:8080/user/getAll
+#user
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzc5ODc5NiwiZXhwIjoxNzEzODg1MTk2fQ.r4IhHd6ucpzSrLTNPYJQJqLU8W2-OR23Kid-sk8nTh4
+
+
+###
+GET http://localhost:8080/user/getAll
+#manager
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwaHVvYy5sZUBnbWFpbC5jb20iLCJpYXQiOjE3MTM3OTk5NjYsImV4cCI6MTcxMzg4NjM2Nn0.UAPbmU7bKTqnzohGo19HKFoXFBZq2AoU8JNoyEGyJn0
+
+###
+GET http://localhost:8080/guest/secured
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzY4OTAxOSwiZXhwIjoxNzEzNzc1NDE5fQ.pgwSRl_J7WkT_PKcuKiSxWdBBRoA_krnfE446URtyQY
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzcxOTkwMSwiZXhwIjoxNzEzODA2MzAxfQ.K3EH0r4vVzbSxqc6t63QOcFddGzsdMDKD-_w2JhhXrw
+
+###
+GET http://localhost:8080/user/secured
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzY4OTAxOSwiZXhwIjoxNzEzNzc1NDE5fQ.pgwSRl_J7WkT_PKcuKiSxWdBBRoA_krnfE446URtyQY
+#Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsZXZhbnBodW9jMTQxMDk1QGdtYWlsLmNvbSIsImlhdCI6MTcxMzcxOTkwMSwiZXhwIjoxNzEzODA2MzAxfQ.K3EH0r4vVzbSxqc6t63QOcFddGzsdMDKD-_w2JhhXrw
 
 ###
 GET http://localhost:8080/user/findById/12
