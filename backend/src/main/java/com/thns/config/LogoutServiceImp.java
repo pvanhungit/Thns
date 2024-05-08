@@ -1,17 +1,18 @@
 package com.thns.config;
 
-import com.thns.token.TokenDao;
+import com.thns.token.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-@Service("LogoutService")
+@Service
+@RequiredArgsConstructor
 public class LogoutServiceImp implements LogoutService {
-    @Autowired
-    private TokenDao tokenDao;
+
+    private final TokenRepository tokenRepository;
 
     @Override
     public void logout(
@@ -25,12 +26,12 @@ public class LogoutServiceImp implements LogoutService {
             return;
         }
         jwt = authHeader.substring(7);
-        var storedToken = tokenDao.findByToken(jwt)
+        var storedToken = tokenRepository.findByToken(jwt)
                 .orElse(null);
         if (storedToken != null) {
             storedToken.setExpired(true);
             storedToken.setRevoked(true);
-            tokenDao.save(storedToken);
+            tokenRepository.save(storedToken);
             SecurityContextHolder.clearContext();
         }
     }

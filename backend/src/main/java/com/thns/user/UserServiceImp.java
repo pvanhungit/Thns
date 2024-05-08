@@ -5,7 +5,6 @@ import com.thns.utils.Mapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,27 +13,22 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
-@Service("userService")
+@Service
 @RequiredArgsConstructor
 public class UserServiceImp implements UserService {
-    @Autowired
-    public Mapper mapper;
 
-    @Autowired
-//    @Qualifier("userJpaDao")
-    private UserDao userDao;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public final Mapper mapper;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getAllUser() {
-        return userDao.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public Optional<User> getUserById(Long userId) {
-        return userDao.findById(userId);
+        return userRepository.findById(userId);
     }
 
     @Override
@@ -42,10 +36,10 @@ public class UserServiceImp implements UserService {
     public UserDto addUser(UserDto userDto) {
         User user = new User();
         BeanUtils.copyProperties(userDto, user);
-        if (userDto.getId() != null && userDao.existsById(userDto.getId())) {
+        if (userDto.getId() != null && userRepository.existsById(userDto.getId())) {
             return null;
         } else {
-            User savedUser = userDao.save(ConvertObject.toInsert(user));
+            User savedUser = userRepository.save(ConvertObject.toInsert(user));
             UserDto savedUserDTO = new UserDto();
             BeanUtils.copyProperties(savedUser, savedUserDTO);
             return savedUserDTO;
@@ -55,7 +49,7 @@ public class UserServiceImp implements UserService {
     @Override
     @Transactional
     public UserDto updateUser(UserDto userDto) {
-        Optional<User> userOptional = userDao.findById(userDto.getId());
+        Optional<User> userOptional = userRepository.findById(userDto.getId());
         if (userOptional.isPresent()) {
             User user = userOptional.get();
 
@@ -65,7 +59,7 @@ public class UserServiceImp implements UserService {
             user.setPassword(userDto.getPassword());
             user.setType(userDto.getType());
 
-            return mapper.map(userDao.save(ConvertObject.toUpdate(user)), UserDto.class) ;
+            return mapper.map(userRepository.save(ConvertObject.toUpdate(user)), UserDto.class) ;
         } else {
             return null;
         }
@@ -75,9 +69,9 @@ public class UserServiceImp implements UserService {
     @Transactional
     public boolean deleteUser(Long userId) {
         try {
-            Optional<User> userOptional = userDao.findById(userId);
+            Optional<User> userOptional = userRepository.findById(userId);
             if (userOptional.isPresent()) {
-                userDao.deleteById(userId);
+                userRepository.deleteById(userId);
                 return true;
             } else {
                 return false;
@@ -106,7 +100,7 @@ public class UserServiceImp implements UserService {
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
 
         // save the new password
-        userDao.save(user);
+        userRepository.save(user);
     }
 
 }

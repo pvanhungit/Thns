@@ -1,8 +1,7 @@
 package com.thns.user;
 
 import com.thns.controller.ExceptionResolver;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
 public class UserController extends ExceptionResolver {
-    @Autowired
-    @Qualifier("userService")
-    private UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("/getAll")
     @PreAuthorize("hasAnyAuthority('admin:read', 'management:read')")
