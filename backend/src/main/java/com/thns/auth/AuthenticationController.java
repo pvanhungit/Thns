@@ -5,7 +5,6 @@ import com.thns.controller.ExceptionResolver;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,8 @@ import java.io.IOException;
 @RequestMapping("/v1/auth")
 @RequiredArgsConstructor
 class AuthenticationController extends ExceptionResolver {
-    @Autowired
-    private AuthenticationService service;
+
+    private final AuthenticationService service;
 
     @GetMapping("/home")
     public ResponseEntity<?> home() {
